@@ -11,11 +11,11 @@ public class GameFieldFrame extends BorderPane {
     private PuzzleTile[] fieldButtons;
     private GameFieldTileHandler tileHandler;
 
-    public GameFieldFrame(int width, int height) {
-        createButtonsField(width, height);
+    public GameFieldFrame(int width, int height, int... activeTiles) {
+        createButtonsField(width, height, activeTiles);
     }
 
-    private void createButtonsField(int width, int height) {
+    private void createButtonsField(int width, int height, int... activeTiles) {
         fieldButtons = new PuzzleTile[(width * height)];
         for (int i = 0; i < fieldButtons.length; i++) {
             fieldButtons[i] = new PuzzleTile();
@@ -23,7 +23,7 @@ public class GameFieldFrame extends BorderPane {
             fieldButtons[i].setMaxSize(50,50);
         }
         tileHandler = new GameFieldTileHandler(width, height, fieldButtons);
-        tileHandler.init(5,10,11);
+        tileHandler.init(activeTiles);
         placeButtonsOnGrid(width, height);
     }
 
