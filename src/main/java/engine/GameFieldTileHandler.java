@@ -22,7 +22,6 @@ public class GameFieldTileHandler {
             final int TILE = i;
             tiles[i].setOnAction(e->{
                 tiles[TILE].triggerTile();
-                System.err.println((TILE-1) + " - " + (width - 1));
                 if (TILE-1 >= 0 && TILE%width != 0) {
                     tiles[TILE-1].triggerTile();
                 }
