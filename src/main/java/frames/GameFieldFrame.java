@@ -1,24 +1,29 @@
 package frames;
 
 import com.jfoenix.controls.JFXButton;
+import components.PuzzleTile;
+import engine.GameFieldTileHandler;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 public class GameFieldFrame extends BorderPane {
 
-    private JFXButton[] fieldButtons;
+    private PuzzleTile[] fieldButtons;
+    private GameFieldTileHandler tileHandler;
 
     public GameFieldFrame(int width, int height) {
         createButtonsField(width, height);
     }
 
     private void createButtonsField(int width, int height) {
-        fieldButtons = new JFXButton[(width * height)];
+        fieldButtons = new PuzzleTile[(width * height)];
         for (int i = 0; i < fieldButtons.length; i++) {
-            fieldButtons[i] = new JFXButton(String.valueOf(i));
+            fieldButtons[i] = new PuzzleTile();
             fieldButtons[i].setMinSize(50,50);
             fieldButtons[i].setMaxSize(50,50);
         }
+        tileHandler = new GameFieldTileHandler(width, height, fieldButtons);
+        tileHandler.init(5,10,11);
         placeButtonsOnGrid(width, height);
     }
 
