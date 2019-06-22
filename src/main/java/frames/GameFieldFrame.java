@@ -22,7 +22,7 @@ public class GameFieldFrame extends BorderPane {
             fieldButtons[i].setMinSize(50,50);
             fieldButtons[i].setMaxSize(50,50);
         }
-        tileHandler = new GameFieldTileHandler(width, height, fieldButtons);
+        tileHandler = new GameFieldTileHandler(width, fieldButtons);
         tileHandler.init(activeTiles);
         placeButtonsOnGrid(width, height);
     }

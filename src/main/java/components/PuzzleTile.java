@@ -4,24 +4,24 @@ import com.jfoenix.controls.JFXButton;
 
 public class PuzzleTile extends JFXButton {
 
+    private boolean isActive;
+
     public PuzzleTile() {
         deactivateTile();
     }
 
-    public PuzzleTile(String value) {
-        super(value);
-    }
-
     public void activateTile() {
-        setText("O");
+        isActive = true;
+        setStyle("-fx-background-color: WHITE");
     }
 
-    public boolean isActive() {
-        return getText().contains("O");
+    private boolean isActive() {
+        return isActive;
     }
 
-    public void deactivateTile() {
-        setText("X");
+    private void deactivateTile() {
+        isActive = false;
+        setStyle("-fx-background-color: BLACK");
     }
 
     public void triggerTile() {

@@ -7,12 +7,10 @@ public class GameFieldTileHandler {
 
     private PuzzleTile[] tiles;
     private int width;
-    private int height;
 
-    public GameFieldTileHandler(int width, int height, PuzzleTile... buttons) {
+    public GameFieldTileHandler(int width, PuzzleTile... buttons) {
         tiles = buttons;
         this.width = width;
-        this.height = height;
     }
 
     public void init(int... activeTiles) {
@@ -21,20 +19,21 @@ public class GameFieldTileHandler {
         }
 
         for (int i = 0; i < tiles.length; i++) {
-            final int tile = i;
+            final int TILE = i;
             tiles[i].setOnAction(e->{
-                tiles[tile].triggerTile();
-                if (tile-1 >= 0) {
-                    tiles[tile-1].triggerTile();
+                tiles[TILE].triggerTile();
+                System.err.println((TILE-1) + " - " + (width - 1));
+                if (TILE-1 >= 0 && TILE%width != 0) {
+                    tiles[TILE-1].triggerTile();
                 }
-                if (tile+1 < tiles.length) {
-                    tiles[tile+1].triggerTile();
+                if (TILE+1 < tiles.length && (TILE+1)%width != 0) {
+                    tiles[TILE+1].triggerTile();
                 }
-                if (tile-width >= 0) {
-                    tiles[tile-width].triggerTile();
+                if (TILE-width >= 0) {
+                    tiles[TILE-width].triggerTile();
                 }
-                if (tile+width < tiles.length) {
-                    tiles[tile+width].triggerTile();
+                if (TILE+width < tiles.length) {
+                    tiles[TILE+width].triggerTile();
                 }
             });
         }
