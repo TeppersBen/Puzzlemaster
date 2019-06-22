@@ -1,6 +1,5 @@
 package engine;
 
-import com.jfoenix.controls.JFXButton;
 import components.PuzzleTile;
 
 public class GameFieldTileHandler {

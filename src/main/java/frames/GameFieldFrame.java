@@ -1,41 +1,53 @@
 package frames;
 
-import com.jfoenix.controls.JFXButton;
 import components.PuzzleTile;
 import engine.GameFieldTileHandler;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.geometry.Pos;
+import javafx.scene.layout.*;
 
 public class GameFieldFrame extends BorderPane {
 
     private PuzzleTile[] fieldButtons;
     private GameFieldTileHandler tileHandler;
 
-    public GameFieldFrame(int width, int height, int... activeTiles) {
-        createButtonsField(width, height, activeTiles);
+    public GameFieldFrame(int rows, int columns, int... activeTiles) {
+        setMinSize(600,350);
+        setMaxSize(600,350);
+        createButtonsField(rows, columns, activeTiles);
     }
 
-    private void createButtonsField(int width, int height, int... activeTiles) {
-        fieldButtons = new PuzzleTile[(width * height)];
+    private void createButtonsField(int rows, int columns, int... activeTiles) {
+        fieldButtons = new PuzzleTile[(rows * columns)];
         for (int i = 0; i < fieldButtons.length; i++) {
             fieldButtons[i] = new PuzzleTile();
-            fieldButtons[i].setMinSize(50,50);
-            fieldButtons[i].setMaxSize(50,50);
         }
-        tileHandler = new GameFieldTileHandler(width, fieldButtons);
+        tileHandler = new GameFieldTileHandler(rows, fieldButtons);
         tileHandler.init(activeTiles);
-        placeButtonsOnGrid(width, height);
+        placeButtonsOnGrid(rows, columns);
     }
 
-    private void placeButtonsOnGrid(int width, int height) {
+    private void placeButtonsOnGrid(int rows, int columns) {
         GridPane pane = new GridPane();
         int currentButton = 0;
-        for (int h = 0; h < height; h++) {
-            for (int w = 0; w < width; w++) {
+        for (int h = 0; h < columns; h++) {
+            for (int w = 0; w < rows; w++) {
                 pane.add(fieldButtons[currentButton], w, h);
                 currentButton++;
             }
         }
+
+        //TODO - fix this broken bollox
+        for (ColumnConstraints constraint : pane.getColumnConstraints()) {
+            constraint.setMaxWidth(getMaxWidth());
+            constraint.setHgrow(Priority.ALWAYS);
+        }
+        for (RowConstraints constraint : pane.getRowConstraints()) {
+            constraint.setMaxHeight(getMaxHeight());
+            constraint.setVgrow(Priority.ALWAYS);
+        }
+
+        pane.setAlignment(Pos.CENTER);
+
         setCenter(pane);
     }
 
