@@ -33,7 +33,22 @@ public class GameFieldTileHandler {
                 if (TILE+width < tiles.length) {
                     tiles[TILE+width].triggerTile();
                 }
+                checkFieldCleared();
             });
+        }
+    }
+
+    private void checkFieldCleared() {
+        boolean isCleared = true;
+        boolean previousBool = tiles[0].isActive();
+        for (PuzzleTile tile : tiles) {
+            if (previousBool != tile.isActive()) {
+                isCleared = false;
+            }
+        }
+        if (isCleared) {
+            //TODO - Navigate the user to the LevelSelection screen
+            System.err.println("Game finished! | TODO - Navigate the user to the LevelSelection screen");
         }
     }
 

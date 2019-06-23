@@ -12,16 +12,16 @@ public class PuzzleTile extends JFXButton {
 
     public void activateTile() {
         isActive = true;
-        setStyle("-fx-background-color: WHITE");
+        setStyle("-fx-background-color: RED");
     }
 
-    private boolean isActive() {
+    public boolean isActive() {
         return isActive;
     }
 
     private void deactivateTile() {
         isActive = false;
-        setStyle("-fx-background-color: BLACK");
+        setStyle("-fx-background-color: WHITE");
     }
 
     public void triggerTile() {

@@ -11,12 +11,12 @@ public class GameFieldFrame extends BorderPane {
     private GameFieldTileHandler tileHandler;
 
     public GameFieldFrame(int rows, int columns, int... activeTiles) {
-        setMinSize(600,350);
-        setMaxSize(600,350);
+        setMinSize(700,350);
+        setMaxSize(700,350);
         createButtonsField(rows, columns, activeTiles);
     }
 
-    private void createButtonsField(int rows, int columns, int... activeTiles) {
+    public void createButtonsField(int rows, int columns, int... activeTiles) {
         fieldButtons = new PuzzleTile[(rows * columns)];
         for (int i = 0; i < fieldButtons.length; i++) {
             fieldButtons[i] = new PuzzleTile();
