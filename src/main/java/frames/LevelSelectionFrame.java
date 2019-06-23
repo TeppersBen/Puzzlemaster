@@ -1,13 +1,11 @@
 package frames;
 
 import com.jfoenix.controls.JFXButton;
-import components.TileLevel;
+import components.Level;
 import engine.FrameHandler;
 import io.Reader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
@@ -21,13 +19,13 @@ public class LevelSelectionFrame extends FlowPane {
     }
 
     private void initAvailableLevels() {
-        List<TileLevel> levels = Reader.getAvailableTileLevels();
+        List<Level> levels = Reader.getAvailableTileLevels();
         levelTiles = new JFXButton[levels.size()];
 
         for (int i = 0; i < levelTiles.length; i++) {
             levelTiles[i] = new JFXButton(String.valueOf(i));
             final int index = i;
-            levelTiles[i].setOnAction(e -> {
+            levelTiles[i].setOnAction(e ->
                 FrameHandler.parent.setScene(
                         new Scene(
                                 new GameFieldFrame(
@@ -36,8 +34,8 @@ public class LevelSelectionFrame extends FlowPane {
                                         levels.get(index).getActiveTiles()
                                 )
                         )
-                );
-            });
+                )
+            );
         }
     }
 

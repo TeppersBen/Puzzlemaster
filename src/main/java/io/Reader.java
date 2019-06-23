@@ -1,6 +1,6 @@
 package io;
 
-import components.TileLevel;
+import components.Level;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,15 +13,17 @@ import java.util.List;
 
 public class Reader {
 
-    private static int index = 1;
+    private static int index;
 
-    public static List<TileLevel> getAvailableTileLevels() {
+    public static List<Level> getAvailableTileLevels() {
         JSONParser parser = new JSONParser();
-        List<TileLevel> tileLevels = new LinkedList<>();
+        List<Level> tileLevels = new LinkedList<>();
 
         try (FileReader reader = new FileReader(Reader.class.getResource("/levels.json").getFile())) {
             Object obj = parser.parse(reader);
             JSONArray levels = (JSONArray) obj;
+
+            index = 1;
 
             levels.forEach(e -> {
                 JSONObject level = (JSONObject) ((JSONObject) e).get("level_" + index);
@@ -33,7 +35,7 @@ public class Reader {
                 }
 
                 tileLevels.add(
-                  new TileLevel(
+                  new Level(
                           index,
                           Integer.parseInt(String.valueOf(level.get("rows"))),
                           Integer.parseInt(String.valueOf(level.get("columns"))),

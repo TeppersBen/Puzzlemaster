@@ -47,8 +47,7 @@ public class GameFieldTileHandler {
             }
         }
         if (isCleared) {
-            //TODO - Navigate the user to the LevelSelection screen
-            System.err.println("Game finished! | TODO - Navigate the user to the LevelSelection screen");
+            FrameHandler.parent.setScene(FrameHandler.levelSelectionFrame);
         }
     }
 

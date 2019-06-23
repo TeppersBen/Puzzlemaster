@@ -1,13 +1,13 @@
 package components;
 
-public class TileLevel {
+public class Level {
 
     private int id;
     private int rows;
     private int columns;
     private int[] activeTiles;
 
-    public TileLevel(int id, int rows, int columns, int... activeTiles) {
+    public Level(int id, int rows, int columns, int... activeTiles) {
         setId(id);
         setRows(rows);
         setColumns(columns);
