@@ -5,7 +5,7 @@ import engine.GameFieldTileHandler;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 
-public class GameFieldFrame extends BorderPane {
+public class GameFieldFrame extends GridPane {
 
     private PuzzleTile[] fieldButtons;
     private GameFieldTileHandler tileHandler;
@@ -27,28 +27,25 @@ public class GameFieldFrame extends BorderPane {
     }
 
     private void placeButtonsOnGrid(int rows, int columns) {
-        GridPane pane = new GridPane();
         int currentButton = 0;
         for (int h = 0; h < columns; h++) {
             for (int w = 0; w < rows; w++) {
-                pane.add(fieldButtons[currentButton], w, h);
+                add(fieldButtons[currentButton], w, h);
                 currentButton++;
             }
         }
 
         //TODO - fix this broken bollox
-        for (ColumnConstraints constraint : pane.getColumnConstraints()) {
+        for (ColumnConstraints constraint : getColumnConstraints()) {
             constraint.setMaxWidth(getMaxWidth());
             constraint.setHgrow(Priority.ALWAYS);
         }
-        for (RowConstraints constraint : pane.getRowConstraints()) {
+        for (RowConstraints constraint : getRowConstraints()) {
             constraint.setMaxHeight(getMaxHeight());
             constraint.setVgrow(Priority.ALWAYS);
         }
 
-        pane.setAlignment(Pos.CENTER);
-
-        setCenter(pane);
+        setAlignment(Pos.CENTER);
     }
 
 }
