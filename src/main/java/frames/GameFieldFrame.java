@@ -4,6 +4,7 @@ import components.PuzzleTile;
 import engine.GameFieldTileHandler;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
+import utils.Settings;
 
 public class GameFieldFrame extends GridPane {
 
@@ -11,8 +12,8 @@ public class GameFieldFrame extends GridPane {
     private GameFieldTileHandler tileHandler;
 
     public GameFieldFrame(int rows, int columns, int... activeTiles) {
-        setMinSize(700,350);
-        setMaxSize(700,350);
+        setMinSize(Settings.width,Settings.height);
+        setMaxSize(Settings.width, Settings.height);
         createButtonsField(rows, columns, activeTiles);
     }
 

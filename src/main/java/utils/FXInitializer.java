@@ -1,3 +1,5 @@
+package utils;
+
 import engine.FrameHandler;
 import frames.GameFieldFrame;
 import frames.LevelSelectionFrame;

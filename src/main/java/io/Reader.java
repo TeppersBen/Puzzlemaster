@@ -14,6 +14,24 @@ import java.util.List;
 public class Reader {
 
     private static int index;
+    private static JSONObject setting;
+
+    public static Object getSettingsVariable(String variable) {
+        JSONParser parser = new JSONParser();
+
+        try (FileReader reader = new FileReader(Reader.class.getResource("/settings.json").getFile())) {
+            Object obj = parser.parse(reader);
+            JSONArray settingVariables = (JSONArray) obj;
+
+            settingVariables.forEach(e -> {
+                setting = (JSONObject) ((JSONObject) e).get("general_settings");
+            });
+            return setting.get(variable);
+        } catch (IOException | ParseException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
     public static List<Level> getAvailableTileLevels() {
         JSONParser parser = new JSONParser();
