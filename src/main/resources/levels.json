@@ -12,5 +12,12 @@
       "columns": 3,
       "activeTiles": "0-2-4-6-8"
     }
+  },
+  {
+    "level_3": {
+      "rows": 20,
+      "columns": 20,
+      "activeTiles": "/"
+    }
   }
 ]

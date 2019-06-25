@@ -13,8 +13,10 @@ public class GameFieldTileHandler {
     }
 
     public void init(int... activeTiles) {
-        for (int i : activeTiles) {
-            tiles[i].activateTile();
+        if (activeTiles != null) {
+            for (int i : activeTiles) {
+                tiles[i].activateTile();
+            }
         }
 
         for (int i = 0; i < tiles.length; i++) {
@@ -33,7 +35,9 @@ public class GameFieldTileHandler {
                 if (TILE+width < tiles.length) {
                     tiles[TILE+width].triggerTile();
                 }
-                checkFieldCleared();
+                if (activeTiles != null){
+                    checkFieldCleared();
+                }
             });
         }
     }

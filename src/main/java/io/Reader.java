@@ -15,6 +15,7 @@ public class Reader {
 
     private static int index;
     private static JSONObject setting;
+    private static int[] activeTiles;
 
     public static Object getSettingsVariable(String variable) {
         JSONParser parser = new JSONParser();
@@ -46,10 +47,14 @@ public class Reader {
             levels.forEach(e -> {
                 JSONObject level = (JSONObject) ((JSONObject) e).get("level_" + index);
 
-                String[] tiles = ((String)level.get("activeTiles")).split("-");
-                int[] activeTiles = new int[tiles.length];
-                for (int i = 0; i < tiles.length; i++) {
-                    activeTiles[i] = Integer.parseInt(tiles[i]);
+                boolean isEmpty = (((String)level.get("activeTiles")).equalsIgnoreCase("/"));
+
+                if (!isEmpty) {
+                    String[] tiles = ((String) level.get("activeTiles")).split("-");
+                    activeTiles = new int[tiles.length];
+                    for (int i = 0; i < tiles.length; i++) {
+                        activeTiles[i] = Integer.parseInt(tiles[i]);
+                    }
                 }
 
                 tileLevels.add(
@@ -57,7 +62,7 @@ public class Reader {
                           index,
                           Integer.parseInt(String.valueOf(level.get("rows"))),
                           Integer.parseInt(String.valueOf(level.get("columns"))),
-                          activeTiles
+                          (isEmpty) ? null : activeTiles
                   )
                 );
                 index++;
