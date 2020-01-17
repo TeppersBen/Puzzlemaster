@@ -1,52 +1,46 @@
 package frames;
 
-import components.PuzzleTile;
-import engine.GameFieldTileHandler;
-import javafx.geometry.Pos;
-import javafx.scene.layout.*;
-import utils.Settings;
+import com.jfoenix.controls.JFXButton;
+import engine.FrameHandler;
+import interfaces.Frame;
+import javafx.scene.layout.BorderPane;
 
-public class GameFieldFrame extends GridPane {
+public class GameFieldFrame extends BorderPane implements Frame {
 
-    private PuzzleTile[] fieldButtons;
-    private GameFieldTileHandler tileHandler;
+    private GameTileGrid gameTileGrid;
+    private JFXButton backButton;
+
+    private int rows;
+    private int columns;
+    private int[] activeTiles;
 
     public GameFieldFrame(int rows, int columns, int... activeTiles) {
-        setMinSize(Settings.width,Settings.height);
-        setMaxSize(Settings.width, Settings.height);
-        createButtonsField(rows, columns, activeTiles);
+        this.rows = rows;
+        this.columns = columns;
+        this.activeTiles = activeTiles;
+
+        initComponents();
+        layoutComponents();
+        initListeners();
     }
 
-    public void createButtonsField(int rows, int columns, int... activeTiles) {
-        fieldButtons = new PuzzleTile[(rows * columns)];
-        for (int i = 0; i < fieldButtons.length; i++) {
-            fieldButtons[i] = new PuzzleTile();
-        }
-        tileHandler = new GameFieldTileHandler(rows, fieldButtons);
-        tileHandler.init(activeTiles);
-        placeButtonsOnGrid(rows, columns);
+    @Override
+    public void initComponents() {
+        gameTileGrid = new GameTileGrid(rows, columns, activeTiles);
+        backButton = new JFXButton("<<");
     }
 
-    private void placeButtonsOnGrid(int rows, int columns) {
-        int currentButton = 0;
-        for (int h = 0; h < columns; h++) {
-            for (int w = 0; w < rows; w++) {
-                add(fieldButtons[currentButton], w, h);
-                currentButton++;
-            }
-        }
+    @Override
+    public void layoutComponents() {
+        setTop(backButton);
+        setCenter(gameTileGrid);
+    }
 
-        //TODO - fix this broken bollox
-        for (ColumnConstraints constraint : getColumnConstraints()) {
-            constraint.setMaxWidth(getMaxWidth());
-            constraint.setHgrow(Priority.ALWAYS);
-        }
-        for (RowConstraints constraint : getRowConstraints()) {
-            constraint.setMaxHeight(getMaxHeight());
-            constraint.setVgrow(Priority.ALWAYS);
-        }
-
-        setAlignment(Pos.CENTER);
+    @Override
+    public void initListeners() {
+        backButton.setOnAction(e->{
+            FrameHandler.changeFrame(new LevelSelectionFrame());
+        });
     }
 
 }

@@ -1,7 +1,6 @@
 package utils;
 
 import engine.FrameHandler;
-import frames.GameFieldFrame;
 import frames.LevelSelectionFrame;
 import javafx.application.Application;
 import javafx.scene.Scene;
